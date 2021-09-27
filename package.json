@@ -1,0 +1,15 @@
+{
+  "name": "node-serve",
+  "version": "1.0.0",
+  "description": "which [包名] 返回包的路径",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node-dev": "^1.1.8"
+  }
+}
