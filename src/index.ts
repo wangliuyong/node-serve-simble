@@ -14,10 +14,11 @@ serve.on('request', (request, response) => {
     response.end()
     return
   }
+  // 设置缓存策略
+  response.setHeader('Cache-Control', 'public,max-age=36000')
   // 解析URL获取参数
   const { pathname, query } = url.parse(xpath)
   let pathName = pathname
-  console.log(pathname);
 
   // 处理首页
   if (pathname === '/') {
