@@ -10,33 +10,50 @@ serve.on('request', (request, response) => {
   const { url: xpath, method, headers } = request
   // 解析URL获取参数
   const { pathname, query } = url.parse(xpath)
+  let pathName = pathname
+  console.log(pathname);
 
-  switch (pathname) {
-    case '/index.html':
-      fs.readFile(path.resolve(__dirname, 'public/index.html'), (error, data) => {
-        if (error) throw error
-        response.setHeader('content-type', 'text/html; charset=utf-8')
-        response.end(data.toString())
-      })
-      break;
-    case '/style.css':
-      fs.readFile(path.resolve(__dirname, 'public/style.css'), (error, data) => {
-        if (error) throw error
-        response.setHeader('content-type', 'text/css; charset=utf-8')
-        response.end(data.toString())
-      })
-      break;
-    case '/main.js':
-      fs.readFile(path.resolve(__dirname, 'public/main.js'), (error, data) => {
-        if (error) throw error
-        response.setHeader('content-type', 'application/javascript; charset=utf-8')
-        response.end(data.toString())
-      })
-      break;
-    default:
-      response.end()
-      break;
+  // 处理首页
+  if (pathname === '/') {
+    pathName = '/index.html'
   }
+
+  fs.readFile(path.resolve(__dirname, `public${pathName}`), (error, data) => {
+    if (error) {
+      response.statusCode = 404
+      response.end()
+    } else {
+      // response.setHeader('content-type', 'text/html; charset=utf-8')
+      response.end(data.toString())
+    }
+  })
+
+  // switch (pathname) {
+  //   case '/index.html':
+  //     fs.readFile(path.resolve(__dirname, 'public/index.html'), (error, data) => {
+  //       if (error) throw error
+  //       response.setHeader('content-type', 'text/html; charset=utf-8')
+  //       response.end(data.toString())
+  //     })
+  //     break;
+  //   case '/style.css':
+  //     fs.readFile(path.resolve(__dirname, 'public/style.css'), (error, data) => {
+  //       if (error) throw error
+  //       response.setHeader('content-type', 'text/css; charset=utf-8')
+  //       response.end(data.toString())
+  //     })
+  //     break;
+  //   case '/main.js':
+  //     fs.readFile(path.resolve(__dirname, 'public/main.js'), (error, data) => {
+  //       if (error) throw error
+  //       response.setHeader('content-type', 'application/javascript; charset=utf-8')
+  //       response.end(data.toString())
+  //     })
+  //     break;
+  //   default:
+  //     response.end()
+  //     break;
+  // }
 
   // const chunkArr = []
   // request.on('data', (chunk) => {
