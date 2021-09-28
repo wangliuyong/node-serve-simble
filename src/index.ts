@@ -8,6 +8,12 @@ const serve = http.createServer()
 serve.on('request', (request, response) => {
 
   const { url: xpath, method, headers } = request
+  // 静态服务器只有get
+  if (method !== 'GET') {
+    response.statusCode = 405
+    response.end()
+    return
+  }
   // 解析URL获取参数
   const { pathname, query } = url.parse(xpath)
   let pathName = pathname
@@ -54,6 +60,7 @@ serve.on('request', (request, response) => {
   //     response.end()
   //     break;
   // }
+
 
   // const chunkArr = []
   // request.on('data', (chunk) => {
