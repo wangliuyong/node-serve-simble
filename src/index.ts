@@ -2,7 +2,7 @@ import * as http from 'http'
 
 const serve = http.createServer()
 
-serve.on('request', (request,response)=> {
+serve.on('request', (request, response) => {
   // console.log('request.headers',request.headers);
   // console.log('request.method',request.method);
   const chunkArr = []
