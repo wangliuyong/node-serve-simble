@@ -1,16 +1,17 @@
 import * as http from 'http'
 import * as path from 'path'
 import * as fs from 'fs'
+import * as url from 'url'
 
 const serve = http.createServer()
 
 serve.on('request', (request, response) => {
 
-  const { url, method, headers } = request
-  const publicPath = path
-  console.log(url);
+  const { url: xpath, method, headers } = request
+  // 解析URL获取参数
+  const { pathname, query } = url.parse(xpath)
 
-  switch (url) {
+  switch (pathname) {
     case '/index.html':
       fs.readFile(path.resolve(__dirname, 'public/index.html'), (error, data) => {
         if (error) throw error
